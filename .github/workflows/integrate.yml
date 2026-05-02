@@ -30,14 +30,16 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
-      - name: Build
+      - name: Build Next.js
         run: npm run build
+      - name: Export static site
+        run: npm run export
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'  # Vite builds to 'dist', not 'build'
+          path: './out' # Next.js exports to 'out'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

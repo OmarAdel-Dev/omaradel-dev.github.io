@@ -1,0 +1,160 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import Link from 'next/link';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { cn } from '@/lib/cn';
+import { navItems, CTA_EMAIL } from '@/data/navigation';
+import MobileNav from './MobileNav';
+import ThemeToggle from '@/components/ui/ThemeToggle';
+import { useActiveSection } from '@/hooks/useActiveSection';
+
+/**
+ * Site-wide header: sticky, transparent initially, picks up a
+ * subtle background once the user scrolls past the fold.
+ *
+ * Desktop: logo | nav links | theme toggle + CTA
+ * Mobile: logo | theme toggle + burger | slide-in overlay
+ */
+export default function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [logoHovered, setLogoHovered] = useState(false);
+  const shouldReduce = useReducedMotion();
+  const activeSection = useActiveSection();
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
+  return (
+    <>
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-40 transition-all duration-300',
+          scrolled ? 'bg-background/90 backdrop-blur-md border-b border-border' : 'bg-transparent',
+        )}
+      >
+        <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between gap-8 px-5 sm:px-10 lg:px-16 xl:px-20">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="font-display text-5xl font-black shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground flex items-baseline gap-0 overflow-hidden cursor-pointer bg-transparent border-0 p-0 text-foreground"
+            aria-label="Omar Adel home, scroll to top"
+            onMouseEnter={() => setLogoHovered(true)}
+            onMouseLeave={() => setLogoHovered(false)}
+            onFocus={() => setLogoHovered(true)}
+            onBlur={() => setLogoHovered(false)}
+          >
+            <span>O</span>
+            <AnimatePresence initial={false}>
+              {logoHovered && (
+                <motion.span
+                  key="mar"
+                  className="inline-block"
+                  initial={shouldReduce ? undefined : { opacity: 0, width: 0 }}
+                  animate={shouldReduce ? undefined : { opacity: 1, width: 'auto' }}
+                  exit={shouldReduce ? undefined : { opacity: 0, width: 0 }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}
+                >
+                  mar
+                </motion.span>
+              )}
+            </AnimatePresence>
+            <span className="ml-[0.04em]">A</span>
+            <AnimatePresence initial={false}>
+              {logoHovered && (
+                <motion.span
+                  key="del"
+                  className="inline-block"
+                  initial={shouldReduce ? undefined : { opacity: 0, width: 0 }}
+                  animate={shouldReduce ? undefined : { opacity: 1, width: 'auto' }}
+                  exit={shouldReduce ? undefined : { opacity: 0, width: 0 }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1], delay: 0.04 }}
+                  style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}
+                >
+                  del
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+
+          <nav aria-label="Main navigation" className="hidden md:block">
+            <ul className="flex items-center gap-10" role="list">
+              {navItems.map((item) => {
+                const isActive = activeSection === item.href.slice(1);
+                return (
+                  <li key={item.href} className="relative pb-1">
+                    <a
+                      href={item.href}
+                      className={cn(
+                        'font-display font-bold text-sm tracking-widest uppercase text-foreground transition-opacity duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground rounded-sm',
+                        isActive ? 'opacity-100' : 'opacity-60 hover:opacity-100',
+                      )}
+                    >
+                      {item.label}
+                    </a>
+                    {isActive && !shouldReduce && (
+                      <motion.span
+                        layoutId="nav-indicator"
+                        className="absolute bottom-0 left-0 right-0 h-px bg-foreground"
+                        transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                      />
+                    )}
+                    {isActive && shouldReduce && (
+                      <span className="absolute bottom-0 left-0 right-0 h-px bg-foreground" />
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-4 shrink-0">
+            <ThemeToggle />
+
+            <a
+              href={CTA_EMAIL}
+              className="hidden md:inline-flex items-center gap-2 border border-foreground bg-foreground text-background font-display font-bold text-sm tracking-widest uppercase px-5 py-2.5 hover:bg-transparent hover:text-foreground transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+            >
+              Let&apos;s Talk
+              <ArrowUpRight size={15} strokeWidth={2} aria-hidden="true" />
+            </a>
+
+            <button
+              type="button"
+              onClick={() => setMobileOpen((v) => !v)}
+              className="md:hidden flex items-center justify-center w-8 h-8 text-foreground hover:opacity-70 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground rounded-sm"
+              aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
+            >
+              {mobileOpen ? (
+                <X size={18} strokeWidth={1.5} />
+              ) : (
+                <Menu size={18} strokeWidth={1.5} />
+              )}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <MobileNav
+        isOpen={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        activeSection={activeSection}
+      />
+    </>
+  );
+}

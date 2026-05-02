@@ -1,0 +1,117 @@
+﻿@import "tailwindcss";
+
+/* ─── Dark-mode strategy: class-based (.dark on <html>) ─── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─────────────────────────────────────────────────────────
+   LIGHT THEME
+   background : near-white
+   foreground : near-black
+   muted      : subtle grey background tint
+   muted-fg   : secondary / label text
+   panel      : editorial black (used for solid dark panels)
+───────────────────────────────────────────────────────── */
+:root {
+  --background:            hsl(0, 0%, 98%);
+  --foreground:            hsl(0, 0%, 6%);
+  --muted:                 hsl(0, 0%, 94%);
+  --muted-foreground:      hsl(0, 0%, 44%);
+  --border:                hsl(0, 0%, 88%);
+  --panel:                 hsl(0, 0%, 5%);
+  --panel-foreground:      hsl(0, 0%, 96%);
+  --inverted-background:   hsl(0, 0%, 5%);
+  --inverted-foreground:   hsl(0, 0%, 96%);
+  --accent:                hsl(0, 0%, 6%);
+}
+
+/* ─────────────────────────────────────────────────────────
+   DARK THEME
+   inverted panel flips to near-white for high contrast
+───────────────────────────────────────────────────────── */
+.dark {
+  --background:            hsl(0, 0%, 5%);
+  --foreground:            hsl(0, 0%, 93%);
+  --muted:                 hsl(0, 0%, 11%);
+  --muted-foreground:      hsl(0, 0%, 56%);
+  --border:                hsl(0, 0%, 16%);
+  --panel:                 hsl(0, 0%, 9%);
+  --panel-foreground:      hsl(0, 0%, 93%);
+  --inverted-background:   hsl(0, 0%, 92%);
+  --inverted-foreground:   hsl(0, 0%, 5%);
+  --accent:                hsl(0, 0%, 93%);
+}
+
+/* ─── Tailwind v4 design tokens ─── */
+@theme inline {
+  /* Colors */
+  --color-background:      var(--background);
+  --color-foreground:      var(--foreground);
+  --color-muted:           var(--muted);
+  --color-muted-fg:        var(--muted-foreground);
+  --color-border:          var(--border);
+  --color-panel:           var(--panel);
+  --color-panel-fg:        var(--panel-foreground);
+  --color-inverted:        var(--inverted-background);
+  --color-inverted-fg:     var(--inverted-foreground);
+  --color-accent:          var(--accent);
+
+  /* Typography */
+  --font-display: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-body:    var(--font-ibm-plex-mono), ui-monospace, "Courier New", monospace;
+}
+
+/* ─── Reset ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ─── Theme transitions (200-300ms, background-color + color + border) ─── */
+html {
+  height: 100%;
+  color-scheme: light;
+  transition: color-scheme 250ms ease;
+  /* Reserve space for sticky header when scrolling to anchors */
+  scroll-padding-top: 4rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100%;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 1rem;           /* 16px base */
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 250ms ease, color 250ms ease;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
