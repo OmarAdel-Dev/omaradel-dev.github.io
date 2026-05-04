@@ -89,7 +89,7 @@ export default function MobileNav({ isOpen, onClose, activeSection }: MobileNavP
               <a
                 href={CTA_EMAIL}
                 onClick={onClose}
-                className="inline-flex items-center gap-2 bg-foreground text-background font-body text-[10px] tracking-[0.15em] uppercase px-5 py-3 hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
+                className="inline-flex items-center gap-2 bg-foreground text-background font-body text-xs tracking-widest uppercase px-5 py-3 hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
               >
                 Let&apos;s Talk <ArrowUpRight size={13} strokeWidth={1.5} aria-hidden="true" />
               </a>

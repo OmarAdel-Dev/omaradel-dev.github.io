@@ -45,7 +45,7 @@ export default function HeroSection() {
 
   return (
     <section id="hero" aria-label="Hero" className="flex min-h-svh flex-col justify-between">
-      <div className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-center gap-x-12 px-5 pt-20 pb-6 sm:px-10 md:grid md:grid-cols-[1fr_272px] md:items-center lg:grid-cols-[1fr_300px] lg:gap-x-20 lg:px-16 lg:pt-24 xl:px-20">
+      <div className="mx-auto flex w-full max-w-360 flex-1 flex-col justify-center gap-x-12 px-5 pt-20 pb-6 sm:px-10 md:grid md:grid-cols-hero-md md:items-center lg:grid-cols-hero-lg lg:gap-x-20 lg:px-16 lg:pt-24 xl:px-20">
         <div>
           <motion.h1
             className="font-display text-[clamp(3.25rem,16vw,4.75rem)] font-black uppercase leading-none text-foreground md:text-[clamp(4rem,9vw,10rem)]"
@@ -66,11 +66,11 @@ export default function HeroSection() {
 
           <motion.div className="mt-4 md:mt-6 flex items-center gap-3" {...fp(0.42)}>
             <span className="inline-block h-px w-10 bg-foreground" aria-hidden="true" />
-            <span className="font-body text-md tracking-[0.3em] uppercase">Omar Adel</span>
+            <span className="font-body text-sm tracking-widest uppercase">Omar Adel</span>
           </motion.div>
 
           <motion.p
-            className="mt-2 font-body text-[clamp(0.95rem,1vw,1.125rem)] text-muted-fg leading-relaxed max-w-[50ch]"
+            className="mt-2 font-body text-[clamp(0.95rem,1vw,1.125rem)] text-muted-fg leading-relaxed max-w-hero-copy"
             {...fp(0.52)}
           >
             Senior Frontend Engineer building scalable, maintainable frontend systems with React,
@@ -82,7 +82,7 @@ export default function HeroSection() {
             <div className="flex flex-col gap-4 mb-4">
               {/* Metadata: focus + status */}
               <div>
-                <p className="font-body text-[0.6rem] tracking-[0.18em] uppercase text-muted-fg mb-1">
+                <p className="font-body text-xs tracking-widest uppercase text-muted-fg mb-1">
                   Focus
                 </p>
                 <p className="font-body text-xs leading-snug">
@@ -91,7 +91,7 @@ export default function HeroSection() {
               </div>
               <div className="h-px bg-border" role="separator" />
               <div>
-                <p className="font-body text-[0.6rem] tracking-[0.18em] uppercase text-muted-fg mb-1">
+                <p className="font-body text-xs tracking-widest uppercase text-muted-fg mb-1">
                   Status
                 </p>
                 <p className="font-body text-xs leading-snug">Open to senior frontend roles</p>
@@ -107,7 +107,7 @@ export default function HeroSection() {
                       href={link.href}
                       target={link.href.startsWith('mailto') ? undefined : '_blank'}
                       rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                      className="flex items-center gap-2 py-2.5 font-body text-xs tracking-[0.15em] uppercase hover:opacity-60 transition-opacity duration-200"
+                      className="flex items-center gap-2 py-2.5 font-body text-xs tracking-widest uppercase hover:opacity-60 transition-opacity duration-200"
                     >
                       <span className="text-muted-fg" aria-hidden="true">
                         /
@@ -128,7 +128,7 @@ export default function HeroSection() {
           {...fi(0.62)}
         >
           <div className="mb-5">
-            <p className="font-body text-[0.625rem] tracking-[0.18em] uppercase text-muted-fg mb-2">
+            <p className="font-body text-xs tracking-widest uppercase text-muted-fg mb-2">
               Focus
             </p>
             <p className="font-body text-sm leading-snug">
@@ -141,7 +141,7 @@ export default function HeroSection() {
           <div className="h-px bg-border mb-5" role="separator" />
 
           <div className="mb-5">
-            <p className="font-body text-[0.625rem] tracking-[0.18em] uppercase text-muted-fg mb-2">
+            <p className="font-body text-xs tracking-widest uppercase text-muted-fg mb-2">
               Status
             </p>
             <p className="font-body text-sm leading-snug">
@@ -161,7 +161,7 @@ export default function HeroSection() {
                   href={link.href}
                   target={link.href.startsWith('mailto') ? undefined : '_blank'}
                   rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                  className="flex items-center gap-2 py-2.5 font-body text-xs tracking-[0.15em] uppercase hover:opacity-60 transition-opacity duration-200"
+                  className="flex items-center gap-2 py-2.5 font-body text-xs tracking-widest uppercase hover:opacity-60 transition-opacity duration-200"
                 >
                   <span className="text-muted-fg" aria-hidden="true">
                     /
@@ -176,7 +176,7 @@ export default function HeroSection() {
       </div>
 
       <motion.div
-        className="mx-auto flex w-full max-w-[1440px] items-center gap-4 px-5 py-6 sm:px-10 sm:py-8 lg:px-16 xl:px-20"
+        className="mx-auto flex w-full max-w-360 items-center gap-4 px-5 py-6 sm:px-10 sm:py-8 lg:px-16 xl:px-20"
         {...fi(0.95)}
       >
         <div
@@ -193,7 +193,7 @@ export default function HeroSection() {
           }}
         >
           <motion.span
-            className="font-body text-[0.625rem] leading-none"
+            className="font-body text-xs leading-none"
             aria-hidden="true"
             animate={shouldReduce ? undefined : { y: [0, 4, 0] }}
             transition={
@@ -209,7 +209,7 @@ export default function HeroSection() {
           >
             <ArrowDown size={16} />
           </motion.span>
-          <span className="font-body text-[0.625rem] tracking-[0.2em] uppercase">
+          <span className="font-body text-xs tracking-widest uppercase">
             Scroll to explore
           </span>
         </div>

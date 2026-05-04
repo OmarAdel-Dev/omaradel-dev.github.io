@@ -60,6 +60,43 @@
   --font-body:    var(--font-ibm-plex-mono), ui-monospace, "Courier New", monospace;
 }
 
+/* ─── Project utilities ─── */
+@utility grid-cols-hero-md {
+  grid-template-columns: 1fr 272px;
+}
+
+@utility grid-cols-hero-lg {
+  grid-template-columns: 1fr 300px;
+}
+
+@utility w-about-panel {
+  width: clamp(320px, 36vw, 500px);
+}
+
+@utility w-about-panel-wide {
+  width: clamp(380px, 38vw, 520px);
+}
+
+@utility w-contact-panel {
+  width: clamp(280px, 36vw, 460px);
+}
+
+@utility max-w-about-copy {
+  max-width: 52ch;
+}
+
+@utility max-w-hero-copy {
+  max-width: 50ch;
+}
+
+@utility max-w-role-copy {
+  max-width: 66ch;
+}
+
+@utility overflow-anchor-none {
+  overflow-anchor: none;
+}
+
 /* ─── Reset ─── */
 *,
 *::before,
@@ -73,7 +110,7 @@ html {
   color-scheme: light;
   transition: color-scheme 250ms ease;
   /* Reserve space for sticky header when scrolling to anchors */
-  scroll-padding-top: 4rem;
+  scroll-padding-top: 2rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {

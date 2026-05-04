@@ -49,7 +49,7 @@ function TabRow({ roles, activeIndex, onChange }: TabRowProps) {
           onClick={() => onChange(i)}
           onKeyDown={(e) => handleKeyDown(e, i)}
           className={cn(
-            'relative flex-1 shrink-0 pt-3 md:pt-0 pb-3 text-center font-body text-[0.75rem] tracking-[0.14em] uppercase transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground sm:flex-none sm:pr-8 sm:text-left sm:text-[0.78rem] sm:last:pr-0',
+            'relative flex-1 shrink-0 pt-3 md:pt-0 pb-3 text-center font-body text-xs tracking-widest uppercase transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground sm:flex-none sm:pr-8 sm:text-left sm:last:pr-0',
             i === activeIndex
               ? 'font-bold text-foreground'
               : 'font-normal text-muted-fg hover:text-foreground',
@@ -86,7 +86,7 @@ function NavArrow({ direction, disabled, onClick }: NavArrowProps) {
       disabled={disabled}
       aria-label={direction === 'prev' ? 'Previous role' : 'Next role'}
       className={cn(
-        'shrink-0 pb-3 font-body text-[0.8rem] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground',
+        'shrink-0 pb-3 font-body text-sm transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground',
         disabled
           ? 'cursor-default text-muted-fg opacity-25'
           : 'text-muted-fg hover:text-foreground',
@@ -111,7 +111,7 @@ function RolePanel({ role, panelIndex }: RolePanelProps) {
   return (
     <div id={`exp-panel-${panelIndex}`} role="tabpanel" aria-labelledby={`exp-tab-${panelIndex}`}>
       {/* Date range */}
-      <p className="mt-8 font-body text-[0.72rem] tracking-[0.15em] text-muted-fg uppercase lg:mt-10">
+      <p className="mt-8 font-body text-xs tracking-widest text-muted-fg uppercase lg:mt-10">
         <time dateTime={role.startDate}>{role.start}</time>
         <span aria-hidden="true"> &mdash; </span>
         {role.endDate ? <time dateTime={role.endDate}>{role.end}</time> : role.end}
@@ -126,7 +126,7 @@ function RolePanel({ role, panelIndex }: RolePanelProps) {
       </h3>
 
       {/* Company */}
-      <p className="mt-3 font-body text-[0.85rem] font-bold tracking-[0.07em] text-foreground uppercase md:text-[0.9rem]">
+      <p className="mt-3 font-body text-sm font-bold tracking-wider text-foreground uppercase">
         <a
           href={role.companyUrl}
           target="_blank"
@@ -134,23 +134,18 @@ function RolePanel({ role, panelIndex }: RolePanelProps) {
           className="group inline-flex items-center gap-1.5 decoration-foreground/40 underline-offset-4 transition-colors duration-150 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
         >
           {role.company}
-          <ArrowUpRight
-            size={13}
-            strokeWidth={1.6}
-            aria-hidden="true"
-            className="opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
-          />
+          <ArrowUpRight size={13} strokeWidth={1.6} aria-hidden="true" />
         </a>
       </p>
 
       {/* Summary */}
-      <p className="mt-5 max-w-[66ch] font-body text-[0.88rem] leading-relaxed text-foreground md:text-[0.93rem]">
+      <p className="mt-5 max-w-role-copy font-body text-sm leading-relaxed text-foreground">
         {role.summary}
       </p>
 
       {/* Selected contributions */}
       <div className="mt-8 border-t border-border pt-6 lg:mt-10 lg:pt-7">
-        <p className="font-body text-[0.68rem] font-bold tracking-[0.2em] text-muted-fg uppercase">
+        <p className="font-body text-xs font-bold tracking-widest text-muted-fg uppercase">
           Selected Contributions
         </p>
 
@@ -167,19 +162,19 @@ function RolePanel({ role, panelIndex }: RolePanelProps) {
             >
               <div className="flex items-baseline gap-2">
                 <span
-                  className="shrink-0 font-body text-[0.68rem] tabular-nums text-muted-fg"
+                  className="shrink-0 font-body text-xs tabular-nums text-muted-fg"
                   aria-hidden="true"
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="font-body text-[0.68rem] text-muted-fg" aria-hidden="true">
+                <span className="font-body text-xs text-muted-fg" aria-hidden="true">
                   &mdash;
                 </span>
-                <h4 className="font-body text-[0.85rem] font-bold uppercase leading-snug tracking-[0.04em] text-foreground">
+                <h4 className="font-body text-sm font-bold uppercase leading-snug tracking-wide text-foreground">
                   {contribution.title}
                 </h4>
               </div>
-              <p className="mt-2 font-body text-[0.82rem] leading-relaxed text-foreground md:text-[0.85rem]">
+              <p className="mt-2 font-body text-sm leading-relaxed text-foreground">
                 {contribution.description}
               </p>
             </div>
@@ -257,7 +252,7 @@ export default function ExperienceSection() {
           </MotionReveal>
 
           {/* Active role panel */}
-          <div className="min-h-168 [overflow-anchor:none] sm:min-h-144 md:min-h-124 lg:min-h-128">
+          <div className="min-h-168 overflow-anchor-none sm:min-h-144 md:min-h-124 lg:min-h-128">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}

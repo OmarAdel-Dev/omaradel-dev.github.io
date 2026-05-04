@@ -37,14 +37,14 @@ export default function ContactSection() {
               {/* Copy, contact links, and CTAs */}
               <MotionReveal
                 delay={0.12}
-                className="flex flex-col pt-10 lg:w-[clamp(280px,36vw,460px)] lg:pt-0"
+                className="flex flex-col pt-10 lg:w-contact-panel lg:pt-0"
               >
                 {/* Copy */}
                 <div className="flex flex-col gap-4">
                   {contactContent.copy.map((line) => (
                     <p
                       key={line}
-                      className="font-body text-[0.88rem] leading-relaxed opacity-70 md:text-[0.93rem]"
+                      className="font-body text-sm leading-relaxed opacity-70"
                     >
                       {line}
                     </p>
@@ -61,7 +61,7 @@ export default function ContactSection() {
                           target: '_blank',
                           rel: 'noopener noreferrer',
                         })}
-                        className="flex items-center gap-3 font-body text-[0.82rem] opacity-65 transition-colors duration-150 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+                        className="flex items-center gap-3 font-body text-sm opacity-65 transition-colors duration-150 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
                       >
                         <span className="font-body opacity-35 select-none" aria-hidden="true">
                           /
@@ -120,10 +120,10 @@ export default function ContactSection() {
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 xl:px-16">
           <div className="flex flex-col gap-3 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
             <div className="flex flex-col gap-1">
-              <p className="font-body text-[0.7rem] opacity-40">
+              <p className="font-body text-xs opacity-40">
                 &copy; {year} {contactContent.footer.credit}. All rights reserved.
               </p>
-              <p className="font-body text-[0.7rem] opacity-40">{contactContent.footer.tech}</p>
+              <p className="font-body text-xs opacity-40">{contactContent.footer.tech}</p>
             </div>
             <Button
               inverted

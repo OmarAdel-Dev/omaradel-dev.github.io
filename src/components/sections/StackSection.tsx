@@ -7,10 +7,10 @@ import { stackContent, type StackGroup } from '@/data/stack';
 function StackGroupCell({ group, delay }: { group: StackGroup; delay: number }) {
   return (
     <MotionReveal delay={delay} className="flex flex-col">
-      <h3 className="font-body text-[0.68rem] font-bold tracking-[0.2em] text-muted-fg uppercase">
+      <h3 className="font-body text-xs font-bold tracking-widest text-muted-fg uppercase">
         {group.category}
       </h3>
-      <p className="mt-3 font-body text-[0.88rem] leading-relaxed text-foreground md:text-[0.93rem]">
+      <p className="mt-3 font-body text-sm leading-relaxed text-foreground">
         {group.items.join(', ')}
       </p>
     </MotionReveal>

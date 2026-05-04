@@ -24,7 +24,7 @@ export default function SectionRail({ number, label, className }: SectionRailPro
         {number}
       </span>
       <span className="h-px w-10 bg-border md:w-12" aria-hidden="true" />
-      <h2 className="font-body text-xl tracking-[0.2em] uppercase">{label}</h2>
+      <h2 className="font-body text-xl tracking-widest uppercase">{label}</h2>
     </div>
   );
 }

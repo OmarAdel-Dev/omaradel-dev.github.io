@@ -50,7 +50,7 @@ export default function Header() {
         animate={shouldReduce ? undefined : 'visible'}
         variants={shouldReduce ? undefined : fadeIn}
       >
-        <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between gap-8 px-5 sm:px-10 lg:px-16 xl:px-20">
+        <div className="mx-auto flex h-16 w-full max-w-360 items-center justify-between gap-8 px-5 sm:px-10 lg:px-16 xl:px-20">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="font-display text-5xl font-black shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground flex items-baseline gap-0 overflow-hidden cursor-pointer bg-transparent border-0 p-0 text-foreground"
@@ -76,7 +76,7 @@ export default function Header() {
                 </motion.span>
               )}
             </AnimatePresence>
-            <span className="ml-[0.04em]">A</span>
+            <span className="ml-0.5">A</span>
             <AnimatePresence initial={false}>
               {logoHovered && (
                 <motion.span
