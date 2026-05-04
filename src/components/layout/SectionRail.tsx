@@ -13,18 +13,18 @@ export default function SectionRail({ number, label, className }: SectionRailPro
   return (
     <div
       className={cn(
-        'flex select-none items-center gap-3 border-b border-border pb-4 md:flex-col md:items-start md:border-b-0 md:border-r md:pb-0 md:pr-8',
+        'mt-14 flex h-12 w-full shrink-0 select-none items-center gap-3 border-b border-border pb-4 md:h-auto md:w-auto md:min-w-43 md:flex-col md:items-start md:border-b-0 md:border-r md:pb-0 md:pr-8 lg:min-w-49 xl:min-w-55',
         className,
       )}
     >
       <span
-        className="font-display text-3xl leading-none font-black text-foreground md:text-[clamp(4rem,8vw,8rem)]"
+        className="font-display text-3xl leading-none font-black md:text-[clamp(4rem,8vw,8rem)]"
         aria-hidden="true"
       >
         {number}
       </span>
       <span className="h-px w-10 bg-border md:w-12" aria-hidden="true" />
-      <span className="font-body text-xl tracking-[0.2em] uppercase">{label}</span>
+      <h2 className="font-body text-xl tracking-[0.2em] uppercase">{label}</h2>
     </div>
   );
 }

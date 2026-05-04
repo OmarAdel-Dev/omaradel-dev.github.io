@@ -9,6 +9,7 @@ export type ExperienceRole = {
   /** Abbreviated label shown in the mobile tab row */
   mobileLabel: string;
   company: string;
+  companyUrl: string;
   title: string;
   start: string;
   startDate: string;
@@ -27,6 +28,7 @@ export const experienceContent = {
       tabLabel: 'DIGITAS ME',
       mobileLabel: 'DIGITAS',
       company: 'DIGITAS ME',
+      companyUrl: 'https://www.digitas.com/en-ae/',
       title: 'SENIOR FRONTEND ENGINEER',
       start: 'JUL 2025',
       startDate: '2025-07',
@@ -37,12 +39,12 @@ export const experienceContent = {
         {
           title: 'WAKALA DMS',
           description:
-            'Built the frontend foundation for a legal document management system, including drafting and review workflows, hierarchical document editing, RTL/LTR support, and RBAC-aware UI.',
+            'Built a legal Document Management System from scratch with React, TypeScript, and Vite, including authentication, scoped access control, drafting and approval flows, and RTL/LTR support.',
         },
         {
-          title: 'KAFD CUSTOMER PORTAL',
+          title: 'STRUCTURE TREE & COMPONENT SYSTEM',
           description:
-            'Contributed to customer-facing frontend flows, reusable UI implementation, and scalable React architecture for portal experiences.',
+            'Built a reusable atomic design component library and an interactive structure tree to support scalable management of hierarchical legal documents.',
         },
       ],
     },
@@ -50,6 +52,7 @@ export const experienceContent = {
       tabLabel: 'WALAPLUS',
       mobileLabel: 'WALAPLUS',
       company: 'WALAPLUS',
+      companyUrl: 'https://www.walaplus.com/en-gb',
       title: 'SENIOR FRONTEND ENGINEER',
       start: 'MAR 2024',
       startDate: '2024-03',
@@ -59,14 +62,14 @@ export const experienceContent = {
         'Owned and developed key frontend features across enterprise products, focusing on maintainability, reusable components, and user experience across internal and customer-facing systems.',
       contributions: [
         {
-          title: 'ENTERPRISE PRODUCT FEATURES',
+          title: 'ENTERPRISE PRODUCT DELIVERY',
           description:
-            'Delivered frontend features across multiple product areas, improving usability and consistency.',
+            'Rapidly mastered Vue.js and the Composition API to deliver multiple production applications using TypeScript and Pinia.',
         },
         {
-          title: 'REUSABLE UI PATTERNS',
+          title: 'TEAM STANDARDS & HIRING',
           description:
-            'Helped reduce repeated implementation by building maintainable components and shared frontend patterns.',
+            'Led React and JavaScript technical assessments, supported hiring decisions, and helped establish Git workflow and code review standards.',
         },
       ],
     },
@@ -74,6 +77,7 @@ export const experienceContent = {
       tabLabel: 'VEZEETA',
       mobileLabel: 'VEZEETA',
       company: 'VEZEETA',
+      companyUrl: 'https://www.vezeeta.com/',
       title: 'FRONTEND ENGINEER',
       start: 'JAN 2021',
       startDate: '2021-01',
@@ -83,14 +87,14 @@ export const experienceContent = {
         'Contributed to healthcare applications using React, Redux, and Next.js, building user-facing features across patient and business experiences.',
       contributions: [
         {
-          title: 'HEALTHCARE USER FLOWS',
+          title: 'HEALTHCARE PRODUCT RELEASES',
           description:
-            'Built and maintained frontend features for healthcare-related journeys with attention to usability, reliability, and state management.',
+            'Contributed to healthcare product releases using React, Redux, and Next.js, with responsive design and cross-browser compatibility.',
         },
         {
-          title: 'REACT / REDUX IMPLEMENTATION',
+          title: 'COMPONENT LIBRARY',
           description:
-            'Implemented UI features and state-driven interactions in a large product environment.',
+            'Built reusable component libraries with React Hooks, Styled Components, and Storybook, applying design system principles to reduce repeated implementation.',
         },
       ],
     },
@@ -98,6 +102,7 @@ export const experienceContent = {
       tabLabel: 'SWISO',
       mobileLabel: 'SWISO',
       company: 'SWISO SOFTWARE DEVELOPMENT',
+      companyUrl: 'https://swisodev.com/',
       title: 'FRONTEND DEVELOPER',
       start: 'FEB 2020',
       startDate: '2020-02',
@@ -106,17 +111,17 @@ export const experienceContent = {
       summary: 'Built internal tools and dashboards, including analytics interfaces and a no-code form builder.',
       contributions: [
         {
-          title: 'ANALYTICS DASHBOARDS',
-          description: 'Implemented internal dashboards for viewing and interacting with business data.',
+          title: 'ANALYTICS DASHBOARD',
+          description:
+            'Developed a comprehensive analytics dashboard using React, including query builder functionality, responsive Chart.js visualizations, and multiple export formats.',
         },
         {
           title: 'NO-CODE FORM BUILDER',
           description:
-            'Worked on a form-building interface that helped users create configurable forms without custom development.',
+            'Built a dynamic no-code form builder integrated with a workflow system, enabling non-technical users to create and publish data collection forms.',
         },
       ],
     },
   ] satisfies ExperienceRole[],
 };
-
 

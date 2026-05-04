@@ -2,18 +2,13 @@
 
 import { motion, useReducedMotion, type MotionProps } from 'framer-motion';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { socialLinks } from '@/data/social';
 
 type AnimProps = Pick<MotionProps, 'initial' | 'animate' | 'transition'>;
 
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const HEADLINE_LINES = ['I BUILD', 'SYSTEMS,', 'NOT JUST', 'COMPONENTS.'] as const;
-
-const SOCIAL_LINKS = [
-  { label: 'GitHub', href: 'https://github.com/omar-adel' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/omar-adel' },
-  { label: 'Email', href: 'mailto:hello@omaradel.dev' },
-] as const;
 
 const headlineContainer = {
   hidden: {},
@@ -49,12 +44,11 @@ export default function HeroSection() {
   });
 
   return (
-    <section id="hero" aria-label="Hero" className="min-h-svh flex flex-col">
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-x-12 px-5 pt-20 pb-10 sm:px-10 md:grid md:grid-cols-[1fr_272px] md:min-h-[calc(100svh-140px)] md:items-center lg:grid-cols-[1fr_300px] lg:gap-x-20 lg:px-16 lg:pt-24 xl:px-20">
+    <section id="hero" aria-label="Hero" className="flex min-h-svh flex-col justify-between">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-center gap-x-12 px-5 pt-20 pb-6 sm:px-10 md:grid md:grid-cols-[1fr_272px] md:items-center lg:grid-cols-[1fr_300px] lg:gap-x-20 lg:px-16 lg:pt-24 xl:px-20">
         <div>
           <motion.h1
-            className="font-display font-black uppercase leading-none text-foreground"
-            style={{ fontSize: 'clamp(4rem, 9vw, 10rem)' }}
+            className="font-display text-[clamp(3.25rem,16vw,4.75rem)] font-black uppercase leading-none text-foreground md:text-[clamp(4rem,9vw,10rem)]"
             variants={shouldReduce ? undefined : headlineContainer}
             initial={shouldReduce ? undefined : 'hidden'}
             animate={shouldReduce ? undefined : 'visible'}
@@ -71,12 +65,12 @@ export default function HeroSection() {
           </motion.h1>
 
           <motion.div className="mt-4 md:mt-6 flex items-center gap-3" {...fp(0.42)}>
-            <span className="inline-block h-px w-20 bg-foreground" aria-hidden="true" />
+            <span className="inline-block h-px w-10 bg-foreground" aria-hidden="true" />
             <span className="font-body text-md tracking-[0.3em] uppercase">Omar Adel</span>
           </motion.div>
 
           <motion.p
-            className="mt-2 font-body text-[clamp(0.95rem,1vw,1.125rem)] text-muted-fg leading-relaxed max-w-[38ch]"
+            className="mt-2 font-body text-[clamp(0.95rem,1vw,1.125rem)] text-muted-fg leading-relaxed max-w-[50ch]"
             {...fp(0.52)}
           >
             Senior Frontend Engineer building scalable, maintainable frontend systems with React,
@@ -85,7 +79,8 @@ export default function HeroSection() {
 
           <motion.div className="md:hidden mt-5" {...fi(0.62)}>
             <div className="h-px bg-border mb-4" role="separator" />
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2 mb-4">
+            <div className="flex flex-col gap-4 mb-4">
+              {/* Metadata: focus + status */}
               <div>
                 <p className="font-body text-[0.6rem] tracking-[0.18em] uppercase text-muted-fg mb-1">
                   Focus
@@ -94,6 +89,7 @@ export default function HeroSection() {
                   Building products that create real impact.
                 </p>
               </div>
+              <div className="h-px bg-border" role="separator" />
               <div>
                 <p className="font-body text-[0.6rem] tracking-[0.18em] uppercase text-muted-fg mb-1">
                   Status
@@ -103,28 +99,32 @@ export default function HeroSection() {
             </div>
             <div className="h-px bg-border mb-3" role="separator" />
             <div className="flex flex-col gap-1">
-              {SOCIAL_LINKS.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith('mailto') ? undefined : '_blank'}
-                  rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                  className="flex items-center gap-1.5 font-body text-[0.6rem] tracking-[0.15em] uppercase hover:opacity-60 transition-opacity duration-200"
-                >
-                  <span className="text-muted-fg" aria-hidden="true">
-                    /
-                  </span>
-                  <span>{link.label}</span>
-                  <ArrowUpRight size={10} aria-hidden="true" />
-                </a>
-              ))}
+              <nav aria-label="Social links">
+                {socialLinks.map((link, i) => (
+                  <div key={link.label}>
+                    {i !== 0 && <div className="h-px bg-border" role="separator" />}
+                    <a
+                      href={link.href}
+                      target={link.href.startsWith('mailto') ? undefined : '_blank'}
+                      rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                      className="flex items-center gap-2 py-2.5 font-body text-xs tracking-[0.15em] uppercase hover:opacity-60 transition-opacity duration-200"
+                    >
+                      <span className="text-muted-fg" aria-hidden="true">
+                        /
+                      </span>
+                      <span className="flex-1">{link.label}</span>
+                      <ArrowUpRight size={12} aria-hidden="true" />
+                    </a>
+                  </div>
+                ))}
+              </nav>
             </div>
           </motion.div>
         </div>
 
         <motion.aside
           aria-label="Profile metadata"
-          className="hidden md:flex flex-col self-start mt-6"
+          className="hidden md:flex flex-col"
           {...fi(0.62)}
         >
           <div className="mb-5">
@@ -154,7 +154,7 @@ export default function HeroSection() {
           <div className="h-px bg-border" role="separator" />
 
           <nav aria-label="Social links">
-            {SOCIAL_LINKS.map((link, i) => (
+            {socialLinks.map((link, i) => (
               <div key={link.label}>
                 {i !== 0 && <div className="h-px bg-border" role="separator" />}
                 <a

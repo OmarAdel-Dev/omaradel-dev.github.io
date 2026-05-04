@@ -14,6 +14,7 @@ interface ThemeContextValue {
   theme: Theme;
   resolvedTheme: 'light' | 'dark';
   setTheme: (theme: Theme) => void;
+  isHydrated: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -32,13 +33,13 @@ function getSystemTheme(): 'light' | 'dark' {
 }
 
 function readStorage(): Theme {
-  if (typeof window === 'undefined') return 'system';
+  if (typeof window === 'undefined') return 'dark';
 
   try {
     const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
-    return stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system';
+    return stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'dark';
   } catch {
-    return 'system';
+    return 'dark';
   }
 }
 
@@ -53,7 +54,7 @@ function getThemeSnapshot(): Theme {
 }
 
 function getServerThemeSnapshot(): Theme {
-  return 'system';
+  return 'dark';
 }
 
 function subscribeTheme(callback: () => void) {
@@ -71,9 +72,24 @@ function subscribeTheme(callback: () => void) {
   };
 }
 
+function getIsHydratedSnapshot() {
+  return true;
+}
+function getIsHydratedServerSnapshot() {
+  return false;
+}
+function subscribeNoop() {
+  return () => {};
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const theme = useSyncExternalStore(subscribeTheme, getThemeSnapshot, getServerThemeSnapshot);
   const resolvedTheme = theme === 'system' ? getSystemTheme() : theme;
+  const isHydrated = useSyncExternalStore(
+    subscribeNoop,
+    getIsHydratedSnapshot,
+    getIsHydratedServerSnapshot,
+  );
 
   // Initialize theme synchronously on mount to prevent flash
   useLayoutEffect(() => {
@@ -91,7 +107,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, isHydrated }}>
       {children}
     </ThemeContext.Provider>
   );

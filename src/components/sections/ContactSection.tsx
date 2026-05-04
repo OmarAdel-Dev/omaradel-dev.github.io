@@ -1,42 +1,29 @@
 'use client';
 
-import { ArrowUpRight, ArrowUp } from 'lucide-react';
-import Container from '@/components/layout/Container';
+import { ArrowUp } from 'lucide-react';
+import SectionRail from '@/components/layout/SectionRail';
+import SectionShell from '@/components/layout/SectionShell';
 import MotionReveal from '@/components/motion/MotionReveal';
+import Button from '@/components/ui/Button';
 import { contactContent } from '@/data/contact';
 
 export default function ContactSection() {
   const year = new Date().getFullYear();
 
   return (
-    <section
-      id="contact"
-      className="flex min-h-svh flex-col border-t border-border bg-panel text-panel-fg"
-    >
-      {/* Main content */}
-      <div className="flex flex-1 flex-col">
-        <Container className="flex flex-1 flex-col py-16 md:py-20 lg:py-24 xl:py-30">
-          <div className="flex flex-1 flex-col md:flex-row md:gap-x-12 lg:gap-x-16 xl:gap-x-20">
-            {/* Rail */}
-            <div
-              className="flex select-none items-center gap-3 border-b border-panel-fg/15 pb-4 md:flex-col md:items-start md:border-b-0 md:border-r md:pb-0 md:pr-8 shrink-0 md:min-w-43 lg:min-w-49 xl:min-w-55"
-              aria-hidden="true"
-            >
-              <span className="font-display text-3xl leading-none font-black text-panel-fg md:text-[clamp(4rem,8vw,8rem)]">
-                {contactContent.railNumber}
-              </span>
-              <span className="h-px w-10 bg-panel-fg/20 md:w-12" />
-              <span className="font-body text-[10px] tracking-[0.2em] uppercase text-panel-fg/55">
-                {contactContent.eyebrow}
-              </span>
-            </div>
+    <>
+      <SectionShell id="contact" inverted className="py-0">
+        <div className="flex min-h-svh flex-col md:flex-row md:gap-x-12 lg:gap-x-16 xl:gap-x-20">
+          {/* Section rail */}
+          <SectionRail number={contactContent.railNumber} label={contactContent.eyebrow} />
 
-            {/* Content: headline + details */}
-            <div className="flex flex-1 flex-col pt-10 md:pt-0 lg:flex-row lg:gap-x-16 xl:gap-x-20">
+          {/* Main content */}
+          <div className="mt-14 flex flex-1 flex-col justify-start">
+            <div className="flex flex-1 flex-col lg:flex-row lg:gap-x-16 xl:gap-x-20">
               {/* Headline */}
-              <MotionReveal className="flex flex-col justify-center lg:flex-1">
+              <MotionReveal className="flex flex-col lg:flex-1">
                 <h2
-                  className="font-display font-black uppercase leading-[0.88] text-panel-fg"
+                  className="font-display font-black uppercase leading-[0.88]"
                   style={{ fontSize: 'clamp(2.8rem, 6.5vw, 7rem)' }}
                 >
                   {contactContent.headline.map((line) => (
@@ -47,17 +34,17 @@ export default function ContactSection() {
                 </h2>
               </MotionReveal>
 
-              {/* Right: copy + links + CTA */}
+              {/* Copy, contact links, and CTAs */}
               <MotionReveal
                 delay={0.12}
-                className="flex flex-col justify-center pt-10 lg:w-[clamp(280px,36vw,460px)] lg:pt-0"
+                className="flex flex-col pt-10 lg:w-[clamp(280px,36vw,460px)] lg:pt-0"
               >
                 {/* Copy */}
                 <div className="flex flex-col gap-4">
                   {contactContent.copy.map((line) => (
                     <p
                       key={line}
-                      className="font-body text-[0.88rem] leading-relaxed text-panel-fg/70 md:text-[0.93rem]"
+                      className="font-body text-[0.88rem] leading-relaxed opacity-70 md:text-[0.93rem]"
                     >
                       {line}
                     </p>
@@ -74,9 +61,9 @@ export default function ContactSection() {
                           target: '_blank',
                           rel: 'noopener noreferrer',
                         })}
-                        className="flex items-center gap-3 font-body text-[0.82rem] text-panel-fg/65 transition-colors duration-150 hover:text-panel-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-panel-fg"
+                        className="flex items-center gap-3 font-body text-[0.82rem] opacity-65 transition-colors duration-150 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
                       >
-                        <span className="font-body text-panel-fg/35 select-none" aria-hidden="true">
+                        <span className="font-body opacity-35 select-none" aria-hidden="true">
                           /
                         </span>
                         {link.label}
@@ -86,44 +73,71 @@ export default function ContactSection() {
                 </ul>
 
                 {/* CTA */}
-                <div className="mt-10">
-                  <a
+                <div className="mt-10 flex flex-col gap-3 md:flex-row md:items-center">
+                  <Button
+                    inverted
+                    as="a"
                     href={contactContent.cta.href}
-                    className="inline-flex items-center gap-3 border border-panel-fg/30 px-7 py-4 font-body text-[0.75rem] font-bold tracking-[0.18em] text-panel-fg uppercase transition-colors duration-200 hover:bg-panel-fg hover:text-panel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-panel-fg w-fit"
+                    icon={
+                      <ArrowUp
+                        size={14}
+                        strokeWidth={1.5}
+                        aria-hidden="true"
+                        className="rotate-45"
+                      />
+                    }
+                    className="w-full justify-center md:w-fit"
                   >
                     {contactContent.cta.label}
-                    <ArrowUpRight size={13} strokeWidth={2} aria-hidden="true" />
-                  </a>
+                  </Button>
+                  <Button
+                    inverted
+                    as="a"
+                    href="/Omar-Adel-CV.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    icon={
+                      <ArrowUp
+                        size={14}
+                        strokeWidth={1.5}
+                        aria-hidden="true"
+                        className="rotate-180"
+                      />
+                    }
+                    className="w-full justify-center bg-transparent text-panel-fg opacity-80 hover:bg-panel-fg hover:text-panel hover:opacity-100 md:w-fit"
+                  >
+                    DOWNLOAD CV
+                  </Button>
                 </div>
               </MotionReveal>
             </div>
           </div>
-        </Container>
-      </div>
+        </div>
+      </SectionShell>
 
       {/* Footer */}
-      <footer className="border-t border-panel-fg/15">
-        <Container>
+      <section className="bg-panel text-panel-fg border-t border-current/15">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 xl:px-16">
           <div className="flex flex-col gap-3 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
             <div className="flex flex-col gap-1">
-              <p className="font-body text-[0.7rem] text-panel-fg/40">
-                © {year} {contactContent.footer.credit}. All rights reserved.
+              <p className="font-body text-[0.7rem] opacity-40">
+                &copy; {year} {contactContent.footer.credit}. All rights reserved.
               </p>
-              <p className="font-body text-[0.7rem] text-panel-fg/40">
-                {contactContent.footer.tech}
-              </p>
+              <p className="font-body text-[0.7rem] opacity-40">{contactContent.footer.tech}</p>
             </div>
-            <button
+            <Button
+              inverted
+              as="button"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="group flex items-center gap-2 border border-panel-fg/30 px-5 py-2.5 font-body text-[0.7rem] font-bold tracking-[0.18em] text-panel-fg uppercase transition-colors duration-200 hover:bg-panel-fg hover:text-panel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-panel-fg w-fit"
+              icon={<ArrowUp size={15} strokeWidth={2} aria-hidden="true" />}
               aria-label="Scroll to top"
+              className="w-full justify-center md:w-auto"
             >
               Back to Top
-              <ArrowUp size={12} strokeWidth={2} aria-hidden="true" />
-            </button>
+            </Button>
           </div>
-        </Container>
-      </footer>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }

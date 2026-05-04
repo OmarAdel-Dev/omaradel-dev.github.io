@@ -1,16 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import SectionRail from '@/components/layout/SectionRail';
 import SectionShell from '@/components/layout/SectionShell';
 import MotionReveal from '@/components/motion/MotionReveal';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { experienceContent, type ExperienceRole } from '@/data/experience';
 import { cn } from '@/lib/cn';
 
-// ─── Tab row ───────────────────────────────────────────────────────────────
-
+// Tab row
 interface TabRowProps {
   roles: ExperienceRole[];
   activeIndex: number;
@@ -36,7 +35,7 @@ function TabRow({ roles, activeIndex, onChange }: TabRowProps) {
     <div
       role="tablist"
       aria-label="Experience roles"
-      className="flex flex-1 overflow-x-auto"
+      className="flex flex-1 overflow-x-auto sm:overflow-x-auto"
       style={{ scrollbarWidth: 'none' }}
     >
       {roles.map((role, i) => (
@@ -50,7 +49,7 @@ function TabRow({ roles, activeIndex, onChange }: TabRowProps) {
           onClick={() => onChange(i)}
           onKeyDown={(e) => handleKeyDown(e, i)}
           className={cn(
-            'relative shrink-0 pb-3 pr-6 text-left font-body text-[0.75rem] tracking-[0.14em] uppercase transition-colors duration-150 last:pr-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground sm:pr-8 sm:text-[0.78rem]',
+            'relative flex-1 shrink-0 pt-3 md:pt-0 pb-3 text-center font-body text-[0.75rem] tracking-[0.14em] uppercase transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground sm:flex-none sm:pr-8 sm:text-left sm:text-[0.78rem] sm:last:pr-0',
             i === activeIndex
               ? 'font-bold text-foreground'
               : 'font-normal text-muted-fg hover:text-foreground',
@@ -60,9 +59,11 @@ function TabRow({ roles, activeIndex, onChange }: TabRowProps) {
           <span className="hidden sm:inline">{role.tabLabel}</span>
 
           {i === activeIndex && (
-            <span
+            <motion.span
+              layoutId="experience-tab-indicator"
               className="absolute bottom-0 left-0 h-0.5 w-full bg-foreground"
               aria-hidden="true"
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             />
           )}
         </button>
@@ -71,8 +72,7 @@ function TabRow({ roles, activeIndex, onChange }: TabRowProps) {
   );
 }
 
-// ─── Prev / Next arrow button ────────────────────────────────────────────────
-
+// Prev / next arrow button
 interface NavArrowProps {
   direction: 'prev' | 'next';
   disabled: boolean;
@@ -93,16 +93,15 @@ function NavArrow({ direction, disabled, onClick }: NavArrowProps) {
       )}
     >
       {direction === 'prev' ? (
-        <ArrowLeft size={14} strokeWidth={1.5} />
+        <ArrowLeft size={14} strokeWidth={1.5} aria-hidden="true" />
       ) : (
-        <ArrowRight size={14} strokeWidth={1.5} />
+        <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
       )}
     </button>
   );
 }
 
-// ─── Role panel ────────────────────────────────────────────────────────────
-
+// Role panel
 interface RolePanelProps {
   role: ExperienceRole;
   panelIndex: number;
@@ -114,7 +113,7 @@ function RolePanel({ role, panelIndex }: RolePanelProps) {
       {/* Date range */}
       <p className="mt-8 font-body text-[0.72rem] tracking-[0.15em] text-muted-fg uppercase lg:mt-10">
         <time dateTime={role.startDate}>{role.start}</time>
-        <span aria-hidden="true"> — </span>
+        <span aria-hidden="true"> &mdash; </span>
         {role.endDate ? <time dateTime={role.endDate}>{role.end}</time> : role.end}
       </p>
 
@@ -128,7 +127,20 @@ function RolePanel({ role, panelIndex }: RolePanelProps) {
 
       {/* Company */}
       <p className="mt-3 font-body text-[0.85rem] font-bold tracking-[0.07em] text-foreground uppercase md:text-[0.9rem]">
-        {role.company}
+        <a
+          href={role.companyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex items-center gap-1.5 decoration-foreground/40 underline-offset-4 transition-colors duration-150 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+        >
+          {role.company}
+          <ArrowUpRight
+            size={13}
+            strokeWidth={1.6}
+            aria-hidden="true"
+            className="opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+          />
+        </a>
       </p>
 
       {/* Summary */}
@@ -161,7 +173,7 @@ function RolePanel({ role, panelIndex }: RolePanelProps) {
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span className="font-body text-[0.68rem] text-muted-fg" aria-hidden="true">
-                  —
+                  &mdash;
                 </span>
                 <h4 className="font-body text-[0.85rem] font-bold uppercase leading-snug tracking-[0.04em] text-foreground">
                   {contribution.title}
@@ -178,18 +190,32 @@ function RolePanel({ role, panelIndex }: RolePanelProps) {
   );
 }
 
-// ─── Section ───────────────────────────────────────────────────────────────
-
+// Section
 export default function ExperienceSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const shouldReduce = useReducedMotion();
   const total = experienceContent.roles.length;
+  const touchStartX = useRef<number | null>(null);
 
   function goPrev() {
     setActiveIndex((i) => Math.max(0, i - 1));
   }
+
   function goNext() {
     setActiveIndex((i) => Math.min(total - 1, i + 1));
+  }
+
+  function handleTouchStart(e: React.TouchEvent) {
+    touchStartX.current = e.touches[0].clientX;
+  }
+
+  function handleTouchEnd(e: React.TouchEvent) {
+    if (touchStartX.current === null) return;
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    touchStartX.current = null;
+    if (Math.abs(delta) < 50) return;
+    if (delta > 0) goNext();
+    else goPrev();
   }
 
   const panelVariants = {
@@ -208,16 +234,12 @@ export default function ExperienceSection() {
 
   return (
     <SectionShell id="experience" className="py-0">
-      <div className="grid min-h-svh gap-x-10 gap-y-8 md:grid-cols-[172px_minmax(0,1fr)] md:gap-x-12 lg:grid-cols-[196px_minmax(0,1fr)] lg:gap-x-16 xl:grid-cols-[220px_minmax(0,1fr)] xl:gap-x-20">
+      <div className="flex min-h-svh flex-col md:flex-row md:gap-x-12 lg:gap-x-16 xl:gap-x-20">
         {/* Section rail */}
-        <SectionRail
-          number={experienceContent.railNumber}
-          label={experienceContent.eyebrow}
-          className="mt-14"
-        />
+        <SectionRail number={experienceContent.railNumber} label={experienceContent.eyebrow} />
 
         {/* Main content */}
-        <div className="flex flex-col justify-start pt-2 mt-14">
+        <div className="flex flex-1 flex-col justify-start md:mt-14">
           {/* Tab row + desktop prev/next */}
           <MotionReveal delay={0.08}>
             <div className="flex items-end border-b border-border">
@@ -235,17 +257,21 @@ export default function ExperienceSection() {
           </MotionReveal>
 
           {/* Active role panel */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              variants={panelVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-            >
-              <RolePanel role={experienceContent.roles[activeIndex]} panelIndex={activeIndex} />
-            </motion.div>
-          </AnimatePresence>
+          <div className="min-h-168 [overflow-anchor:none] sm:min-h-144 md:min-h-124 lg:min-h-128">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                variants={panelVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+              >
+                <RolePanel role={experienceContent.roles[activeIndex]} panelIndex={activeIndex} />
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </SectionShell>

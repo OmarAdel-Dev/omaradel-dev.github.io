@@ -1,5 +1,6 @@
 import { cn } from '@/lib/cn';
 import { type ReactNode } from 'react';
+import MotionSection from '@/components/motion/MotionSection';
 import Container from './Container';
 
 interface SectionShellProps {
@@ -28,13 +29,15 @@ export default function SectionShell({
     <section
       id={id}
       className={cn(
-        'min-h-svh py-16 md:py-20 lg:py-24 xl:py-[7.5rem]',
+        'min-h-svh py-12 md:py-16 lg:py-20 xl:py-24',
         !noBorder && 'border-t border-border',
-        inverted && 'bg-inverted text-inverted-fg',
+        inverted && 'bg-panel text-panel-fg',
         className,
       )}
     >
-      <Container>{children}</Container>
+      <MotionSection>
+        <Container>{children}</Container>
+      </MotionSection>
     </section>
   );
 }

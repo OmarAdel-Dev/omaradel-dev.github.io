@@ -13,17 +13,17 @@ export const contactContent = {
   ],
   links: [
     {
-      label: 'omar.adel.dev@gmail.com',
-      href: 'mailto:omar.adel.dev@gmail.com',
+      label: 'omaradel97@outlook.com',
+      href: 'mailto:omaradel97@outlook.com',
     },
     {
-      label: 'linkedin.com/in/omaradeldev',
-      href: 'https://linkedin.com/in/omaradeldev',
+      label: 'linkedin.com/in/omaradel97',
+      href: 'https://www.linkedin.com/in/omaradel97',
     },
   ] satisfies ContactLink[],
   cta: {
     label: "LET'S TALK",
-    href: 'mailto:omar.adel.dev@gmail.com',
+    href: 'mailto:omaradel97@outlook.com',
   },
   footer: {
     credit: 'Omar Adel',

@@ -1,17 +1,12 @@
-import { type Variants } from "framer-motion";
+import { type Variants } from 'framer-motion';
 
-// ─── Easing ────────────────────────────────────────────────────────────────
-// Editorial ease — fast deceleration, premium feel   spec: [0.22, 1, 0.36, 1]
+// Easing
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
-// Ease-in for exits / closes
 const easeIn: [number, number, number, number] = [0.32, 0, 0.67, 0];
 
-// ─── Variants ──────────────────────────────────────────────────────────────
-
 /**
- * Fade-up reveal: opacity 0 → 1, y +24px → 0.
- * Primary reveal variant; use for most entering elements.
- * spec: y 16-24px, duration 0.45-0.7s, ease [0.22, 1, 0.36, 1]
+ * Fade-up reveal: opacity 0 to 1, y +24px to 0.
+ * Primary reveal variant for most entering elements.
  */
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -23,22 +18,18 @@ export const fadeUp: Variants = {
 };
 
 /**
- * Simple fade-in: opacity only.
- * Use for full-bleed elements or things without directional movement.
- * spec: duration 0.45-0.7s
+ * Simple fade-in for full-bleed elements or things without directional movement.
  */
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.5, ease: 'easeOut' },
   },
 };
 
 /**
- * Stagger parent: staggers `whileInView` children.
- * Pair with `fadeUp` or `fadeIn` on children.
- * spec: staggerChildren 0.06-0.12
+ * Stagger parent for children with matching hidden / visible variant keys.
  */
 export const staggerContainer: Variants = {
   hidden: {},
@@ -51,25 +42,11 @@ export const staggerContainer: Variants = {
 };
 
 /**
- * Subtle scale-in: opacity 0 → 1, scale 0.97 → 1.
- * Use for cards, panels, editorial blocks.
- */
-export const scaleInSubtle: Variants = {
-  hidden: { opacity: 0, scale: 0.97 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.55, ease },
-  },
-};
-
-/**
  * Mobile menu slide-in from the right.
- * Use with AnimatePresence for enter / exit.
  */
 export const slideMenu: Variants = {
   closed: {
-    x: "100%",
+    x: '100%',
     opacity: 0,
     transition: { duration: 0.28, ease: easeIn },
   },

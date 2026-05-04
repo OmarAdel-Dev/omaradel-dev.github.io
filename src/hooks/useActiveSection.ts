@@ -2,15 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
-// All section IDs in page order — missing ones are silently skipped
+// All section IDs in page order; missing ones are silently skipped.
 const SECTION_IDS = ['hero', 'about', 'experience', 'stack', 'contact'] as const;
 
 /**
- * Returns the ID of the section currently visible in the "active zone" —
- * the band between 20% and 50% from the top of the viewport.
- *
- * For full-viewport sections this gives clean, predictable transitions
- * without flickering between sections.
+ * Returns the ID of the section currently visible in the active viewport zone.
  */
 export function useActiveSection(): string {
   const [activeId, setActiveId] = useState('');
@@ -24,8 +20,7 @@ export function useActiveSection(): string {
           }
         }
       },
-      // The zone is 20%–50% from the top; one full-viewport section
-      // occupies this zone at a time.
+      // The active zone is 20%-50% from the top of the viewport.
       { rootMargin: '-20% 0px -50% 0px', threshold: 0 },
     );
 

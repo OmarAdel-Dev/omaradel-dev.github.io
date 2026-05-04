@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import Link from 'next/link';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { navItems, CTA_EMAIL } from '@/data/navigation';
 import MobileNav from './MobileNav';
 import ThemeToggle from '@/components/ui/ThemeToggle';
+import Button from '@/components/ui/Button';
 import { useActiveSection } from '@/hooks/useActiveSection';
+import { fadeIn } from '@/lib/motion';
 
 /**
  * Site-wide header: sticky, transparent initially, picks up a
@@ -40,11 +41,14 @@ export default function Header() {
 
   return (
     <>
-      <header
+      <motion.header
         className={cn(
           'fixed inset-x-0 top-0 z-40 transition-all duration-300',
           scrolled ? 'bg-background/90 backdrop-blur-md border-b border-border' : 'bg-transparent',
         )}
+        initial={shouldReduce ? undefined : 'hidden'}
+        animate={shouldReduce ? undefined : 'visible'}
+        variants={shouldReduce ? undefined : fadeIn}
       >
         <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between gap-8 px-5 sm:px-10 lg:px-16 xl:px-20">
           <button
@@ -100,7 +104,6 @@ export default function Header() {
                       href={item.href}
                       className={cn(
                         'font-display font-bold text-sm tracking-widest uppercase text-foreground transition-opacity duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground rounded-sm',
-                        isActive ? 'opacity-100' : 'opacity-60 hover:opacity-100',
                       )}
                     >
                       {item.label}
@@ -124,13 +127,9 @@ export default function Header() {
           <div className="flex items-center gap-4 shrink-0">
             <ThemeToggle />
 
-            <a
-              href={CTA_EMAIL}
-              className="hidden md:inline-flex items-center gap-2 border border-foreground bg-foreground text-background font-display font-bold text-sm tracking-widest uppercase px-5 py-2.5 hover:bg-transparent hover:text-foreground transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-            >
+            <Button as="a" href={CTA_EMAIL} className="hidden md:inline-flex">
               Let&apos;s Talk
-              <ArrowUpRight size={15} strokeWidth={2} aria-hidden="true" />
-            </a>
+            </Button>
 
             <button
               type="button"
@@ -148,7 +147,7 @@ export default function Header() {
             </button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       <MobileNav
         isOpen={mobileOpen}

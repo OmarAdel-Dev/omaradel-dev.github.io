@@ -68,10 +68,7 @@ export default function MobileNav({ isOpen, onClose, activeSection }: MobileNavP
                     <a
                       href={item.href}
                       onClick={onClose}
-                      className={cn(
-                        'flex items-center gap-3 font-display text-4xl font-black uppercase leading-none transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground',
-                        isActive ? 'opacity-100' : 'opacity-40 hover:opacity-100',
-                      )}
+                      className="flex items-center gap-3 font-display text-4xl font-black uppercase leading-none transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                     >
                       <span
                         className={cn(

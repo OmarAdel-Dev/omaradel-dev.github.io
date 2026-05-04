@@ -3,8 +3,7 @@ import SectionShell from '@/components/layout/SectionShell';
 import MotionReveal from '@/components/motion/MotionReveal';
 import { stackContent, type StackGroup } from '@/data/stack';
 
-// ─── Single group cell ───────────────────────────────────────────────────────
-
+// Single group cell
 function StackGroupCell({ group, delay }: { group: StackGroup; delay: number }) {
   return (
     <MotionReveal delay={delay} className="flex flex-col">
@@ -18,23 +17,18 @@ function StackGroupCell({ group, delay }: { group: StackGroup; delay: number }) 
   );
 }
 
-// ─── Section ─────────────────────────────────────────────────────────────────
-
+// Section
 export default function StackSection() {
   const topRow = stackContent.groups.slice(0, 3);
   const bottomRow = stackContent.groups.slice(3);
 
   return (
-    <SectionShell id="stack">
-      <div className="flex flex-col md:flex-row md:gap-x-12 lg:gap-x-16 xl:gap-x-20">
-        <SectionRail
-          number={stackContent.railNumber}
-          label={stackContent.eyebrow}
-          className="shrink-0 md:min-w-43 lg:min-w-49 xl:min-w-55"
-        />
+    <SectionShell id="stack" className="py-0">
+      <div className="flex min-h-svh flex-col md:flex-row md:gap-x-12 lg:gap-x-16 xl:gap-x-20">
+        <SectionRail number={stackContent.railNumber} label={stackContent.eyebrow} />
 
-        <div className="flex-1 pt-10 md:pt-0">
-          {/* Top row — 3 columns on desktop, 2 on tablet, 1 on mobile */}
+        <div className="mt-10 flex-1 md:mt-14">
+          {/* Top row: 3 columns on desktop, 2 on tablet, 1 on mobile. */}
           <div className="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {topRow.map((group, i) => (
               <StackGroupCell key={group.category} group={group} delay={0.06 * i} />
