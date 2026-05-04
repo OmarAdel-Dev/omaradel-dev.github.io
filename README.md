@@ -1,36 +1,173 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Omar Adel — Portfolio
+
+A personal portfolio website for **Omar Adel**, Senior Frontend Engineer, built to showcase frontend systems thinking, selected work experience, technical stack, and contact information.
+
+The design follows a monochrome editorial style with full-viewport sections, bold typography, subtle motion, responsive layouts, and light/dark theme support.
+
+---
+
+## Tech Stack
+
+- **Next.js**
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+- **Framer Motion**
+- **Lucide React**
+- **next/font**
+
+---
+
+## Features
+
+- Fully responsive portfolio layout
+- Light and dark theme support
+- Editorial black-and-white design system
+- Full-viewport section scenes
+- Smooth section navigation
+- Animated section reveals with Framer Motion
+- Accessible tabs for Experience section
+- Downloadable CV link
+- Real contact and social links
+- Data-driven Experience and Stack sections
+- Optimized for static deployment
+
+---
+
+## Sections
+
+- **Hero** — main positioning and quick links
+- **About** — professional intro and working principles
+- **Experience** — role-based experience with selected contributions
+- **Quote** — editorial transition section
+- **Stack** — tools and technologies
+- **Contact** — email, LinkedIn, CV, and CTA
+
+---
+
+## Project Structure
+
+```txt
+src/
+  app/
+    layout.tsx
+    page.tsx
+    globals.css
+
+  components/
+    layout/
+    ui/
+    motion/
+    sections/
+
+  data/
+    experience.ts
+    stack.ts
+    socialLinks.ts
+    navigation.ts
+
+  lib/
+    utils.ts
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```txt
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Build
 
-To learn more about Next.js, take a look at the following resources:
+Create a production build:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run the production build locally:
 
-## Deploy on Vercel
+```bash
+npm run start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Linting
+
+Run lint checks:
+
+```bash
+npm run lint
+```
+
+---
+
+## CV
+
+The downloadable CV should be placed in the `public` folder:
+
+```txt
+public/Omar-Adel-CV.pdf
+```
+
+It is linked in the website as:
+
+```txt
+/Omar-Adel-CV.pdf
+```
+
+---
+
+## Deployment
+
+This project can be deployed on platforms like:
+
+- Vercel
+- Netlify
+- GitHub Pages, with proper static export configuration if needed
+
+Recommended deployment: **Vercel**.
+
+---
+
+## Design Direction
+
+The portfolio uses a minimal editorial system:
+
+- monochrome palette
+- large condensed typography
+- thin dividers
+- structured grids
+- full-screen section rhythm
+- subtle motion
+- reusable components
+- accessible interactions
+
+---
+
+## Author
+
+**Omar Adel**  
+Senior Frontend Engineer
+
+- GitHub: [OmarAdel-Dev](https://github.com/OmarAdel-Dev)
+- LinkedIn: [omaradel97](https://www.linkedin.com/in/omaradel97)
+- Email: [omaradel97@outlook.com](mailto:omaradel97@outlook.com)
