@@ -5,6 +5,7 @@ import { ArrowUpRight, X } from 'lucide-react';
 import { slideMenu, staggerContainer, fadeUp } from '@/lib/motion';
 import { navItems, CTA_EMAIL } from '@/data/navigation';
 import { cn } from '@/lib/cn';
+import { scrollToSection } from '@/lib/scrollToSection';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -67,7 +68,14 @@ export default function MobileNav({ isOpen, onClose, activeSection }: MobileNavP
                   <motion.li key={item.href} variants={fadeUp}>
                     <a
                       href={item.href}
-                      onClick={onClose}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                          ? 0
+                          : 260;
+                        onClose();
+                        window.setTimeout(() => scrollToSection(item.href), delay);
+                      }}
                       className="flex items-center gap-3 font-display text-4xl font-black uppercase leading-none transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                     >
                       <span

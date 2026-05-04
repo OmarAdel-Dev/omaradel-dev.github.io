@@ -27,7 +27,7 @@ export default function StackSection() {
       <div className="flex min-h-svh flex-col md:flex-row md:gap-x-12 lg:gap-x-16 xl:gap-x-20">
         <SectionRail number={stackContent.railNumber} label={stackContent.eyebrow} />
 
-        <div className="mt-10 flex-1 md:mt-14">
+        <div data-scroll-start className="mt-10 flex-1 md:mt-14">
           {/* Top row: 3 columns on desktop, 2 on tablet, 1 on mobile. */}
           <div className="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {topRow.map((group, i) => (

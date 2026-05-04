@@ -11,7 +11,7 @@ export default function AboutSection() {
         <SectionRail number={aboutContent.railNumber} label={aboutContent.eyebrow} />
 
         {/* Content: stacked on mobile, split on desktop. */}
-        <div className="flex flex-1 flex-col lg:flex-row">
+        <div data-scroll-start className="flex flex-1 flex-col lg:flex-row">
           {/* Who I am */}
           <div className="flex flex-col pb-10 pt-8 md:pb-12 md:pt-16 lg:flex-1 lg:pb-20 lg:pt-20 lg:pr-14 xl:pr-16">
             <MotionReveal>
@@ -50,15 +50,12 @@ export default function AboutSection() {
                     {index > 0 && <div className="h-px my-4 bg-panel-fg/15" aria-hidden="true" />}
                     <div className="flex items-baseline gap-2">
                       <span
-                        className="shrink-0 font-body text-xs tabular-nums text-panel-fg/50"
+                        className="shrink-0 font-body tabular-nums text-panel-fg/50"
                         aria-hidden="true"
                       >
                         {row.number}
                       </span>
-                      <span
-                        className="font-body text-xs text-panel-fg/40"
-                        aria-hidden="true"
-                      >
+                      <span className="font-body text-xs text-panel-fg/40" aria-hidden="true">
                         /
                       </span>
                       <h3 className="font-body text-sm font-bold tracking-widest text-panel-fg uppercase">

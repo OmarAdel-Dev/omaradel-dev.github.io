@@ -13,8 +13,8 @@ export const contactContent = {
   ],
   links: [
     {
-      label: 'omaradel97@outlook.com',
-      href: 'mailto:omaradel97@outlook.com',
+      label: 'github.com/omaradel97',
+      href: 'https://github.com/omaradel97',
     },
     {
       label: 'linkedin.com/in/omaradel97',

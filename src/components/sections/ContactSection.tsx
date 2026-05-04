@@ -18,7 +18,7 @@ export default function ContactSection() {
           <SectionRail number={contactContent.railNumber} label={contactContent.eyebrow} />
 
           {/* Main content */}
-          <div className="mt-14 flex flex-1 flex-col justify-start">
+          <div data-scroll-start className="mt-14 flex flex-1 flex-col justify-start">
             <div className="flex flex-1 flex-col lg:flex-row lg:gap-x-16 xl:gap-x-20">
               {/* Headline */}
               <MotionReveal className="flex flex-col lg:flex-1">

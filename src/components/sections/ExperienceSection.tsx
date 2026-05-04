@@ -234,7 +234,7 @@ export default function ExperienceSection() {
         <SectionRail number={experienceContent.railNumber} label={experienceContent.eyebrow} />
 
         {/* Main content */}
-        <div className="flex flex-1 flex-col justify-start md:mt-14">
+        <div data-scroll-start className="flex flex-1 flex-col justify-start md:mt-14">
           {/* Tab row + desktop prev/next */}
           <MotionReveal delay={0.08}>
             <div className="flex items-end border-b border-border">

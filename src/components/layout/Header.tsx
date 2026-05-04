@@ -10,6 +10,7 @@ import ThemeToggle from '@/components/ui/ThemeToggle';
 import Button from '@/components/ui/Button';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { fadeIn } from '@/lib/motion';
+import { scrollToSection } from '@/lib/scrollToSection';
 
 /**
  * Site-wide header: sticky, transparent initially, picks up a
@@ -29,6 +30,19 @@ export default function Header() {
     const handler = () => setScrolled(window.scrollY > 24);
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
+  }, []);
+
+  useEffect(() => {
+    const scrollToCurrentHash = () => {
+      if (window.location.hash) {
+        requestAnimationFrame(() => scrollToSection(window.location.hash));
+      }
+    };
+
+    scrollToCurrentHash();
+    window.addEventListener('hashchange', scrollToCurrentHash);
+
+    return () => window.removeEventListener('hashchange', scrollToCurrentHash);
   }, []);
 
   // Lock body scroll when mobile menu is open
@@ -52,7 +66,10 @@ export default function Header() {
       >
         <div className="mx-auto flex h-16 w-full max-w-360 items-center justify-between gap-8 px-5 sm:px-10 lg:px-16 xl:px-20">
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.history.pushState(null, '', window.location.pathname);
+            }}
             className="font-display text-5xl font-black shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground flex items-baseline gap-0 overflow-hidden cursor-pointer bg-transparent border-0 p-0 text-foreground"
             aria-label="Omar Adel home, scroll to top"
             onMouseEnter={() => setLogoHovered(true)}
@@ -102,6 +119,10 @@ export default function Header() {
                   <li key={item.href} className="relative pb-1">
                     <a
                       href={item.href}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        scrollToSection(item.href);
+                      }}
                       className={cn(
                         'font-display font-bold text-sm tracking-widest uppercase text-foreground transition-opacity duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground rounded-sm',
                       )}
