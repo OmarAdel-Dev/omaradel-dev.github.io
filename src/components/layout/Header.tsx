@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
@@ -23,14 +23,24 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [logoHovered, setLogoHovered] = useState(false);
+  const logoResetTimeout = useRef<number | null>(null);
   const shouldReduce = useReducedMotion();
   const activeSection = useActiveSection();
+
+  const clearLogoResetTimeout = () => {
+    if (logoResetTimeout.current) {
+      window.clearTimeout(logoResetTimeout.current);
+      logoResetTimeout.current = null;
+    }
+  };
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 24);
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
   }, []);
+
+  useEffect(() => clearLogoResetTimeout, []);
 
   useEffect(() => {
     const scrollToCurrentHash = () => {
@@ -69,13 +79,27 @@ export default function Header() {
             onClick={() => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
               window.history.pushState(null, '', window.location.pathname);
+              if (window.matchMedia('(max-width: 767px)').matches) {
+                clearLogoResetTimeout();
+                setLogoHovered(true);
+                logoResetTimeout.current = window.setTimeout(() => {
+                  setLogoHovered(false);
+                  logoResetTimeout.current = null;
+                }, 2000);
+              }
             }}
             className="font-display text-5xl font-black shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground flex items-baseline gap-0 overflow-hidden cursor-pointer bg-transparent border-0 p-0 text-foreground"
             aria-label="Omar Adel home, scroll to top"
             onMouseEnter={() => setLogoHovered(true)}
-            onMouseLeave={() => setLogoHovered(false)}
+            onMouseLeave={() => {
+              clearLogoResetTimeout();
+              setLogoHovered(false);
+            }}
             onFocus={() => setLogoHovered(true)}
-            onBlur={() => setLogoHovered(false)}
+            onBlur={() => {
+              clearLogoResetTimeout();
+              setLogoHovered(false);
+            }}
           >
             <span>O</span>
             <AnimatePresence initial={false}>
