@@ -231,7 +231,11 @@ export default function ExperienceSection() {
     <SectionShell id="experience" className="py-0">
       <div className="flex min-h-svh flex-col md:flex-row md:gap-x-12 lg:gap-x-16 xl:gap-x-20">
         {/* Section rail */}
-        <SectionRail number={experienceContent.railNumber} label={experienceContent.eyebrow} />
+        <SectionRail
+          number={experienceContent.railNumber}
+          label={experienceContent.eyebrow}
+          className="md:pt-14"
+        />
 
         {/* Main content */}
         <div data-scroll-start className="flex flex-1 flex-col justify-start md:mt-14">

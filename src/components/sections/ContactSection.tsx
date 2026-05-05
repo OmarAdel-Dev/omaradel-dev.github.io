@@ -11,14 +11,19 @@ export default function ContactSection() {
   const year = new Date().getFullYear();
 
   return (
-    <>
-      <SectionShell id="contact" inverted className="py-0">
-        <div className="flex min-h-svh flex-col md:flex-row md:gap-x-12 lg:gap-x-16 xl:gap-x-20">
+    <SectionShell id="contact" inverted className="py-0">
+      <div className="flex min-h-svh flex-col">
+        {/* Rail + main content */}
+        <div className="flex flex-1 flex-col md:mb-14 md:flex-row md:gap-x-12 lg:gap-x-16 xl:gap-x-20">
           {/* Section rail */}
-          <SectionRail number={contactContent.railNumber} label={contactContent.eyebrow} />
+          <SectionRail
+            number={contactContent.railNumber}
+            label={contactContent.eyebrow}
+            className="md:pt-14"
+          />
 
           {/* Main content */}
-          <div data-scroll-start className="mt-14 flex flex-1 flex-col justify-start">
+          <div data-scroll-start className="mt-14 flex flex-1 flex-col justify-start md:pt-14">
             <div className="flex flex-1 flex-col lg:flex-row lg:gap-x-16 xl:gap-x-20">
               {/* Headline */}
               <MotionReveal className="flex flex-col lg:flex-1">
@@ -35,17 +40,11 @@ export default function ContactSection() {
               </MotionReveal>
 
               {/* Copy, contact links, and CTAs */}
-              <MotionReveal
-                delay={0.12}
-                className="flex flex-col pt-10 lg:w-contact-panel lg:pt-0"
-              >
+              <MotionReveal delay={0.12} className="flex flex-col pt-10 lg:w-contact-panel lg:pt-0">
                 {/* Copy */}
                 <div className="flex flex-col gap-4">
                   {contactContent.copy.map((line) => (
-                    <p
-                      key={line}
-                      className="font-body text-sm leading-relaxed opacity-70"
-                    >
+                    <p key={line} className="font-body text-sm leading-relaxed opacity-70">
                       {line}
                     </p>
                   ))}
@@ -113,11 +112,9 @@ export default function ContactSection() {
             </div>
           </div>
         </div>
-      </SectionShell>
 
-      {/* Footer */}
-      <section className="bg-panel text-panel-fg border-t border-current/15">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 xl:px-16">
+        {/* Footer — pinned to the bottom of the section */}
+        <footer className="mt-auto border-t border-current/15">
           <div className="flex flex-col gap-3 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
             <div className="flex flex-col gap-1">
               <p className="font-body text-xs opacity-40">
@@ -136,8 +133,8 @@ export default function ContactSection() {
               Back to Top
             </Button>
           </div>
-        </div>
-      </section>
-    </>
+        </footer>
+      </div>
+    </SectionShell>
   );
 }

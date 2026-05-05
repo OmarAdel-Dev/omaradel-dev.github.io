@@ -66,7 +66,7 @@ export default function HeroSection() {
 
           <motion.div className="mt-4 md:mt-6 flex items-center gap-3" {...fp(0.42)}>
             <span className="inline-block h-px w-10 bg-foreground" aria-hidden="true" />
-            <span className="font-body text-sm tracking-widest uppercase">Omar Adel</span>
+            <span className="font-body text-md tracking-widest uppercase">Omar Adel</span>
           </motion.div>
 
           <motion.p
@@ -128,9 +128,7 @@ export default function HeroSection() {
           {...fi(0.62)}
         >
           <div className="mb-5">
-            <p className="font-body text-xs tracking-widest uppercase text-muted-fg mb-2">
-              Focus
-            </p>
+            <p className="font-body text-xs tracking-widest uppercase text-muted-fg mb-2">Focus</p>
             <p className="font-body text-sm leading-snug">
               Building products
               <br />
@@ -141,9 +139,7 @@ export default function HeroSection() {
           <div className="h-px bg-border mb-5" role="separator" />
 
           <div className="mb-5">
-            <p className="font-body text-xs tracking-widest uppercase text-muted-fg mb-2">
-              Status
-            </p>
+            <p className="font-body text-xs tracking-widest uppercase text-muted-fg mb-2">Status</p>
             <p className="font-body text-sm leading-snug">
               Open to senior
               <br />
@@ -209,9 +205,7 @@ export default function HeroSection() {
           >
             <ArrowDown size={16} />
           </motion.span>
-          <span className="font-body text-xs tracking-widest uppercase">
-            Scroll to explore
-          </span>
+          <span className="font-body text-xs tracking-widest uppercase">Scroll to explore</span>
         </div>
         <div className="flex-1 h-px bg-border" role="separator" />
       </motion.div>

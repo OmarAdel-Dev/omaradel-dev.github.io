@@ -13,12 +13,12 @@ export const contactContent = {
   ],
   links: [
     {
-      label: 'github.com/omaradel97',
-      href: 'https://github.com/omaradel97',
-    },
-    {
       label: 'linkedin.com/in/omaradel97',
       href: 'https://www.linkedin.com/in/omaradel97',
+    },
+    {
+      label: 'github.com/OmarAdel-Dev',
+      href: 'https://github.com/OmarAdel-Dev',
     },
   ] satisfies ContactLink[],
   cta: {
